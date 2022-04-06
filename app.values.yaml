@@ -1,25 +1,41 @@
 apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+    service: helloworld
+spec:
+  ports:
+  - port: 3000
+    name: http
+  selector:
+    app: helloworld
+---
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-world
-  namespace: default
- spec:
-  replicas: 2
+  name: helloworld-v1
+  labels:
+    version: v1
+spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: hello-world-app
+      app: helloworld
+      version: v1
   template:
     metadata:
       labels:
-        app: hello-world-app
+        app: helloworld
+        version: v1
     spec:
       containers:
-      - env:
-        - name: service_name
-          value: hello-world-app
+      - name: helloworld
         image: pavansa/simple-mern-example:latest
-        imagePullPolicy: IfNotPresent
-        name: hello-world
+        resources:
+          requests:
+            cpu: "100m"
+        imagePullPolicy: IfNotPresent #Always
         ports:
-        - containerPort: 8080
-          protocol: TCP
+        - containerPort: 3000
