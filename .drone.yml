@@ -1,0 +1,75 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: npm test
+    image: node:16-alpine
+    commands:
+    - npm install
+    - npm test
+
+  - name: build frontend (dry run)
+    image: plugins/docker
+    settings:
+      dry_run: true
+      username: pavansa
+      password:
+        from_secret: docker_password
+      repo: pavansa/mernfrontend
+      tags:
+      - latest
+      - ${DRONE_COMMIT_SHA:0:8}
+    when:
+      event:
+      - pull_request
+
+  - name: build backend (dry run)
+    image: plugins/docker
+    settings:
+      dry_run: true
+      username: pavansa
+      password:
+        from_secret: docker_password
+      repo: pavansa/mernbackend
+      context: Backend
+      dockerfile: Backend/Dockerfile
+      tags:
+      - latest
+      - ${DRONE_COMMIT_SHA:0:8}
+    when:
+      event:
+      - pull_request
+
+  - name: build frontend
+    image: plugins/docker
+    settings:
+      username: pavansa
+      password:
+        from_secret: docker_password
+      repo: pavansa/mernfrontend
+      tags:
+      - latest
+      - ${DRONE_COMMIT_SHA:0:8}
+    when:
+      event:
+      - push
+
+  - name: build backend
+    image: plugins/docker
+    settings:
+      username: pavansa
+      password:
+        from_secret: docker_password
+      repo: pavansa/mernbackend
+      context: Backend
+      dockerfile: Backend/Dockerfile
+      tags:
+      - latest
+      - ${DRONE_COMMIT_SHA:0:8}
+    when:
+      event:
+      - push
+
+trigger:
+  branch:
+  - main
