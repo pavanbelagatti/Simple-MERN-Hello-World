@@ -5,9 +5,16 @@ metadata:
   labels:
     app: helloworld
     service: helloworld
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld
+    service: helloworld
 spec:
   ports:
-  - port: 3000
+  - port: 80
     name: http
   selector:
     app: helloworld
@@ -31,11 +38,19 @@ spec:
         version: v1
     spec:
       containers:
-      - name: helloworld
-        image: pavansa/simple-mern-example:latest
+      - name: backend
+        image: jimsheldon/mernbackend:9bee001d
         resources:
           requests:
             cpu: "100m"
-        imagePullPolicy: IfNotPresent #Always
+        imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 3000
+        - containerPort: 5001
+      - name: helloworld
+        image: jimsheldon/mernfrontend:9bee001d
+        resources:
+          requests:
+            cpu: "100m"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
