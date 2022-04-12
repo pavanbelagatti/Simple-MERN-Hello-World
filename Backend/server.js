@@ -1,12 +1,15 @@
+const dotenv = require("dotenv");
 //requiering express and initializing the app:
 const app = require('express')(); 
 //requiering the cors middleware:
 const cors = require('cors');
 
+dotenv.config({ path: './config.env' });
+
 const PORT = 5001; //we will use port 5001
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://maga:t1PbbwzKrRk4arkH@cluster0.p7eeh.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const uri = process.env.DATABASE;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
   const collection = client.db("test").collection("devices");
