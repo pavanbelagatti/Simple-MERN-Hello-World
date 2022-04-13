@@ -5,13 +5,6 @@ metadata:
   labels:
     app: helloworld
     service: helloworld
-apiVersion: v1
-kind: Service
-metadata:
-  name: helloworld
-  labels:
-    app: helloworld
-    service: helloworld
 spec:
   ports:
   - port: 80
@@ -39,7 +32,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: jimsheldon/mernbackend:9bee001d
+        image: pavansa/mernbackend:0317618d
         resources:
           requests:
             cpu: "100m"
@@ -47,7 +40,7 @@ spec:
         ports:
         - containerPort: 5001
       - name: helloworld
-        image: jimsheldon/mernfrontend:9bee001d
+        image: pavansa/mernfrontend:0317618d
         resources:
           requests:
             cpu: "100m"
