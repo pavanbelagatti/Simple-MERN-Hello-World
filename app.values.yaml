@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: pavansa/mernbackend:0317618d
+        image: pavansa/mernbackend
         resources:
           requests:
             cpu: "100m"
@@ -40,7 +40,7 @@ spec:
         ports:
         - containerPort: 5001
       - name: helloworld
-        image: pavansa/mernfrontend:0317618d
+        image: pavansa/mernfrontend
         resources:
           requests:
             cpu: "100m"
