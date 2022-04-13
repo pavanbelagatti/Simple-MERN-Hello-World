@@ -1,7 +1,7 @@
 # Pre-requisites and setup
 * Prerequisites In order to run this app, you need Node.js, which is a javascript runtime installed on our machine. So download and install the latest Node.js available from this [link](https://nodejs.org/en/).
 
-* Setup a database using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/signup), click on connect and get the URL string.
+* Setup a database using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/signup), get the URL string.
 
 
 # Getting Started 
