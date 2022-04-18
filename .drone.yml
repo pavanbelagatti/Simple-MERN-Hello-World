@@ -1,16 +1,9 @@
 kind: pipeline
-name: frontend
+name: default
 
 platform:
   os: linux
   arch: arm64
-
-trigger:
-  branch:
-  - main
-  paths:
-    exclude:
-    - Backend/*
 
 steps:
   - name: npm test
@@ -34,31 +27,6 @@ steps:
       event:
       - pull_request
 
-  - name: build frontend
-    image: plugins/docker
-    settings:
-      username: pavansa
-      password:
-        from_secret: docker_password
-      repo: pavansa/mernfrontend
-      tags:
-      - latest
-      - ${DRONE_COMMIT_SHA:0:8}
-    when:
-      event:
-      - push
-
----
-kind: pipeline
-name: backend
-
-trigger:
-  branch:
-  - main
-  paths:
-  - Backend/*
-  
-steps:
   - name: build backend (dry run)
     image: plugins/docker
     settings:
@@ -76,6 +44,20 @@ steps:
       event:
       - pull_request
 
+  - name: build frontend
+    image: plugins/docker
+    settings:
+      username: pavansa
+      password:
+        from_secret: docker_password
+      repo: pavansa/mernfrontend
+      tags:
+      - latest
+      - ${DRONE_COMMIT_SHA:0:8}
+    when:
+      event:
+      - push
+
   - name: build backend
     image: plugins/docker
     settings:
@@ -91,3 +73,7 @@ steps:
     when:
       event:
       - push
+
+trigger:
+  branch:
+  - main
