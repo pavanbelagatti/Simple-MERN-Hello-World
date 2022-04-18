@@ -15,4 +15,4 @@ Go to the root of the application folder, install the required dependencies by r
 
 You should then see the output on your local http://localhost:3001/
 
-Congrats!
+Congrats!!!
