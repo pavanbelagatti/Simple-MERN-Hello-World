@@ -35,7 +35,7 @@ steps:
       username: pavansa
       password:
         from_secret: docker_password
-      repo: pavansa/mernbackend
+      repo: pavansa/mernback
       context: Backend
       dockerfile: Backend/Dockerfile
       tags:
@@ -51,7 +51,7 @@ steps:
       username: pavansa
       password:
         from_secret: docker_password
-      repo: pavansa/mernfrontend
+      repo: pavansa/mernfront
       tags:
       - latest
       - ${DRONE_COMMIT_SHA:0:8}
