@@ -54,9 +54,6 @@ steps:
       tags:
       - latest
       - ${DRONE_COMMIT_SHA:0:8}
-    when:
-      event:
-      - push
 
   - name: build backend
     image: plugins/docker
@@ -70,9 +67,6 @@ steps:
       tags:
       - latest
       - ${DRONE_COMMIT_SHA:0:8}
-    when:
-      event:
-      - push
 
 trigger:
   branch:
