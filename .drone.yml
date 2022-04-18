@@ -1,6 +1,10 @@
 kind: pipeline
 name: frontend
 
+platform:
+  os: linux
+  arch: arm64
+
 trigger:
   branch:
   - main
