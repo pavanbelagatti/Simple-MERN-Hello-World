@@ -19,7 +19,7 @@ steps:
       username: pavansa
       password:
         from_secret: docker_password
-      repo: pavansa/mernfrontend
+      repo: jimsheldon/mernfrontend
       tags:
       - latest
       - ${DRONE_COMMIT_SHA:0:8}
@@ -34,7 +34,7 @@ steps:
       username: pavansa
       password:
         from_secret: docker_password
-      repo: pavansa/mernbackend
+      repo: jimsheldon/mernbackend
       context: Backend
       dockerfile: Backend/Dockerfile
       tags:
@@ -50,7 +50,7 @@ steps:
       username: pavansa
       password:
         from_secret: docker_password
-      repo: pavansa/mernfrontend
+      repo: jimsheldon/mernfrontend
       tags:
       - latest
       - ${DRONE_COMMIT_SHA:0:8}
@@ -61,7 +61,7 @@ steps:
       username: pavansa
       password:
         from_secret: docker_password
-      repo: pavansa/mernbackend
+      repo: jimsheldon/mernbackend
       context: Backend
       dockerfile: Backend/Dockerfile
       tags:
